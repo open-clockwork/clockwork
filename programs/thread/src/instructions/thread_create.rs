@@ -5,7 +5,7 @@ use anchor_lang::{
     solana_program::system_program,
     system_program::{transfer, Transfer}
 };
-use clockwork_utils::thread::{Trigger, SerializableInstruction};
+use open_clockwork_utils::thread::{Trigger, SerializableInstruction};
 
 use crate::state::*;
 

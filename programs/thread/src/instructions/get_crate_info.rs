@@ -1,6 +1,6 @@
 use {
     anchor_lang::{prelude::*, system_program},
-    clockwork_utils::CrateInfo,
+    open_clockwork_utils::CrateInfo,
 };
 
 /// Accounts required for the `get_crate_info` instruction.

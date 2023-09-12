@@ -1,5 +1,5 @@
 use anchor_lang::{prelude::*, InstructionData, solana_program::instruction::Instruction};
-use clockwork_utils::thread::ThreadResponse;
+use open_clockwork_utils::thread::ThreadResponse;
 
 use crate::state::*;
 

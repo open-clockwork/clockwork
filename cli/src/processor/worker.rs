@@ -6,7 +6,7 @@ use anchor_lang::{
     AccountDeserialize, InstructionData, ToAccountMetas
 };
 use anchor_spl::{associated_token, associated_token::get_associated_token_address, token};
-use clockwork_network_program::state::{
+use open_clockwork_network_program::state::{
     Config, Fee, Penalty, Registry, Snapshot, SnapshotFrame, Worker, WorkerSettings,
 };
 use solana_sdk::signature::{Keypair, Signer};
@@ -92,8 +92,8 @@ pub fn create(client: &Client, signatory: Keypair, silent: bool) -> Result<(), C
     let worker_id = registry.total_workers;
     let worker_pubkey = Worker::pubkey(worker_id);
     let ix = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::WorkerCreate {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::WorkerCreate {
             associated_token_program: associated_token::ID,
             authority: client.payer_pubkey(),
             config: Config::pubkey(),
@@ -108,7 +108,7 @@ pub fn create(client: &Client, signatory: Keypair, silent: bool) -> Result<(), C
             worker: worker_pubkey,
             worker_tokens: get_associated_token_address(&worker_pubkey, &config.mint),
         }.to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::WorkerCreate {}.data(),
+        data: open_clockwork_network_program::instruction::WorkerCreate {}.data(),
     };
     client
         .send_and_confirm(&[ix], &[client.payer(), &signatory])
@@ -132,13 +132,13 @@ pub fn update(client: &Client, id: u64, signatory: Option<Keypair>) -> Result<()
         signatory: signatory.map_or(worker.signatory, |v| v.pubkey()),
     };
     let ix = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::WorkerUpdate {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::WorkerUpdate {
             authority: client.payer_pubkey(),
             system_program: system_program::ID,
             worker: worker_pubkey,
         }.to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::WorkerUpdate { settings }.data(),
+        data: open_clockwork_network_program::instruction::WorkerUpdate { settings }.data(),
     };
     client.send_and_confirm(&[ix], &[client.payer()]).unwrap();
     get(client, worker.id)?;

@@ -6,7 +6,7 @@ use anchor_lang::{
     InstructionData,
 };
 use anchor_spl::associated_token::get_associated_token_address;
-use clockwork_utils::thread::{ThreadResponse, PAYER_PUBKEY};
+use open_clockwork_utils::thread::{ThreadResponse, PAYER_PUBKEY};
 
 use crate::state::*;
 

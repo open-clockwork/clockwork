@@ -1,18 +1,18 @@
 [package]
-name = "clockwork-relayer-api"
-version = "2.0.19"
+name = "open-clockwork-relayer-api"
+version = "0.1.0"
 edition = "2021"
 description = "Clockwork relayer for webhook requests"
 license = "AGPL-3.0-or-later"
 homepage = "https://clockwork.xyz"
-repository = "https://github.com/clockwork-xyz/relayer"
+repository = "https://github.com/open-clockwork/clockwork/relayer"
 documentation = "https://docs.clockwork.xyz"
 readme = "./README.md"
 keywords = ["solana"]
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "clockwork_relayer_api"
+name = "open_clockwork_relayer_api"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

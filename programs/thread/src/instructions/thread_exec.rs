@@ -6,8 +6,8 @@ use anchor_lang::{
     },
     AnchorDeserialize, InstructionData,
 };
-use clockwork_network_program::state::{Fee, Pool, Worker, WorkerAccount};
-use clockwork_utils::thread::{SerializableInstruction, ThreadResponse, PAYER_PUBKEY};
+use open_clockwork_network_program::state::{Fee, Pool, Worker, WorkerAccount};
+use open_clockwork_utils::thread::{SerializableInstruction, ThreadResponse, PAYER_PUBKEY};
 
 use crate::{errors::ClockworkError, state::*};
 
@@ -24,11 +24,11 @@ pub struct ThreadExec<'info> {
     #[account(
         mut,
         seeds = [
-            clockwork_network_program::state::SEED_FEE,
+            open_clockwork_network_program::state::SEED_FEE,
             worker.key().as_ref(),
         ],
         bump,
-        seeds::program = clockwork_network_program::ID,
+        seeds::program = open_clockwork_network_program::ID,
         has_one = worker,
     )]
     pub fee: Account<'info, Fee>,

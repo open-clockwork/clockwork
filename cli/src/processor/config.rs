@@ -4,7 +4,7 @@ use anchor_lang::{
     },
     InstructionData, ToAccountMetas
 };
-use clockwork_network_program::state::{Config, ConfigSettings};
+use open_clockwork_network_program::state::{Config, ConfigSettings};
 
 use crate::{client::Client, errors::CliError};
 
@@ -37,12 +37,12 @@ pub fn set(
 
     // Submit tx
     let ix = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::ConfigUpdate {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::ConfigUpdate {
             admin: client.payer_pubkey(),
             config: Config::pubkey(),
         }.to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::ConfigUpdate { settings }.data(),
+        data: open_clockwork_network_program::instruction::ConfigUpdate { settings }.data(),
     };
     client.send_and_confirm(&[ix], &[client.payer()]).unwrap();
     get(client)?;

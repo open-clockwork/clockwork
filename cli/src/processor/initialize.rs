@@ -6,7 +6,7 @@ use anchor_lang::{
     },
     InstructionData, ToAccountMetas,
 };
-use clockwork_network_program::state::{Config, Pool, Registry, Snapshot};
+use open_clockwork_network_program::state::{Config, Pool, Registry, Snapshot};
 
 use crate::{client::Client, errors::CliError};
 
@@ -14,8 +14,8 @@ pub fn initialize(client: &Client, mint: Pubkey) -> Result<(), CliError> {
     // Initialize the programs
     let admin = client.payer_pubkey();
     let ix_a = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::Initialize {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::Initialize {
             admin,
             config: Config::pubkey(),
             mint,
@@ -23,11 +23,11 @@ pub fn initialize(client: &Client, mint: Pubkey) -> Result<(), CliError> {
             snapshot: Snapshot::pubkey(0),
             system_program: system_program::ID,
         }.to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::Initialize {}.data(),
+        data: open_clockwork_network_program::instruction::Initialize {}.data(),
     };
     let ix_b = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::PoolCreate {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::PoolCreate {
             admin,
             config: Config::pubkey(),
             payer: admin,
@@ -35,7 +35,7 @@ pub fn initialize(client: &Client, mint: Pubkey) -> Result<(), CliError> {
             registry: Registry::pubkey(),
             system_program: system_program::ID,
         }.to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::PoolCreate {}.data(),
+        data: open_clockwork_network_program::instruction::PoolCreate {}.data(),
     };
 
     // Submit tx

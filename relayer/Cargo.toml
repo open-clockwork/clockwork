@@ -1,11 +1,11 @@
 [package]
-name = "clockwork-relayer"
-version = "2.0.19"
+name = "open-clockwork-relayer"
+version = "0.1.0"
 edition = "2021"
 description = "Clockwork relayer for webhook requests"
 license = "AGPL-3.0-or-later"
 homepage = "https://clockwork.xyz"
-repository = "https://github.com/clockwork-xyz/relayer"
+repository = "https://github.com/open-clockwork/clockwork/relayer"
 documentation = "https://docs.clockwork.xyz"
 readme = "./README.md"
 keywords = ["solana"]
@@ -18,8 +18,8 @@ actix-cors = "0.6.4"
 actix-web = "4.3.1"
 anchor-lang = "0.28.0"
 byte-unit = "4.0.18"
-clockwork-webhook-program = { path = "../programs/webhook", version = "=2.0.19" }
-clockwork-relayer-api = { path = "api", version = "=2.0.19" }
+open-clockwork-webhook-program = { path = "../programs/webhook", version = "=0.1.0" }
+open-clockwork-relayer-api = { path = "api", version = "=0.1.0" }
 curve25519-dalek = "3.2.1"
 lazy_static = "1.4.0"
 reqwest = "0.11.14"

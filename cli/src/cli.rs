@@ -1,6 +1,6 @@
 use clap::{crate_version, Arg, ArgGroup, Command};
-use clockwork_thread_program::state::{SerializableInstruction, Trigger};
-use clockwork_webhook_program::state::HttpMethod;
+use open_clockwork_thread_program::state::{SerializableInstruction, Trigger};
+use open_clockwork_webhook_program::state::HttpMethod;
 use solana_sdk::{pubkey::Pubkey, signature::Keypair};
 
 use crate::parser::ProgramInfo;

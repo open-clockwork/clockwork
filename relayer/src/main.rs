@@ -3,11 +3,11 @@ use std::{fs, path::Path, str::FromStr};
 use actix_cors::Cors;
 use actix_web::{get, post, web, App, HttpServer, Responder};
 use anchor_lang::{prelude::Pubkey, AccountDeserialize};
-use clockwork_relayer_api::{
+use open_clockwork_relayer_api::{
     Relay, SecretApprove, SecretCreate, SecretGet, SecretList, SecretListResponse, SecretRevoke,
     SignedRequest,
 };
-use clockwork_webhook_program::state::{HttpMethod, Webhook};
+use open_clockwork_webhook_program::state::{HttpMethod, Webhook};
 use rayon::prelude::*;
 use regex::Regex;
 use serde::{Deserialize, Serialize};

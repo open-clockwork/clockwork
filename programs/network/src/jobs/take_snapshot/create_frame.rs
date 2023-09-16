@@ -4,7 +4,7 @@ use anchor_lang::{
     InstructionData,
 };
 use anchor_spl::{associated_token::get_associated_token_address, token::TokenAccount};
-use clockwork_utils::thread::{ThreadResponse, PAYER_PUBKEY};
+use open_clockwork_utils::thread::{ThreadResponse, PAYER_PUBKEY};
 use std::mem::size_of;
 
 use crate::state::*;

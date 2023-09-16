@@ -1,6 +1,6 @@
 use anchor_lang::{prelude::*, solana_program::instruction::Instruction, InstructionData};
 use anchor_spl::token::{transfer, Token, TokenAccount, Transfer};
-use clockwork_utils::thread::ThreadResponse;
+use open_clockwork_utils::thread::ThreadResponse;
 
 use crate::{errors::*, state::*};
 

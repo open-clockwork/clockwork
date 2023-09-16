@@ -1,8 +1,8 @@
 use std::{convert::TryFrom, fs, path::PathBuf, str::FromStr};
 
 use clap::ArgMatches;
-use clockwork_thread_program::state::{SerializableAccount, SerializableInstruction, Trigger};
-use clockwork_webhook_program::state::HttpMethod;
+use open_clockwork_thread_program::state::{SerializableAccount, SerializableInstruction, Trigger};
+use open_clockwork_webhook_program::state::HttpMethod;
 use serde::{Deserialize as JsonDeserialize, Serialize as JsonSerialize};
 use solana_sdk::{
     pubkey::Pubkey,

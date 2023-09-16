@@ -10,8 +10,8 @@ use {
     },
     anyhow::{Context, Result},
     clap::crate_version,
-    clockwork_network_program::state::{Config, ConfigSettings, Registry},
-    clockwork_thread_program::state::{Thread, Trigger},
+    open_clockwork_network_program::state::{Config, ConfigSettings, Registry},
+    open_clockwork_thread_program::state::{Thread, Trigger},
     solana_sdk::{
         native_token::LAMPORTS_PER_SOL,
         program_pack::Pack,
@@ -152,75 +152,75 @@ fn create_threads(client: &Client, mint_pubkey: Pubkey) -> Result<()> {
     let epoch_thread_id = "clockwork.network.epoch";
     let epoch_thread_pubkey = Thread::pubkey(client.payer_pubkey(), epoch_thread_id.into());
     let ix_a1 = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::DistributeFeesJob {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::DistributeFeesJob {
             config: Config::pubkey(),
             registry: Registry::pubkey(),
             thread: epoch_thread_pubkey,
         }
         .to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::DistributeFeesJob {}.data(),
+        data: open_clockwork_network_program::instruction::DistributeFeesJob {}.data(),
     };
     let ix_a2 = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::ProcessUnstakesJob {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::ProcessUnstakesJob {
             config: Config::pubkey(),
             registry: Registry::pubkey(),
             thread: epoch_thread_pubkey,
         }
         .to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::ProcessUnstakesJob {}.data(),
+        data: open_clockwork_network_program::instruction::ProcessUnstakesJob {}.data(),
     };
     let ix_a3 = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::StakeDelegationsJob {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::StakeDelegationsJob {
             config: Config::pubkey(),
             registry: Registry::pubkey(),
             thread: epoch_thread_pubkey,
         }
         .to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::StakeDelegationsJob {}.data(),
+        data: open_clockwork_network_program::instruction::StakeDelegationsJob {}.data(),
     };
     let ix_a4 = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::TakeSnapshotJob {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::TakeSnapshotJob {
             config: Config::pubkey(),
             registry: Registry::pubkey(),
             thread: epoch_thread_pubkey,
         }
         .to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::TakeSnapshotJob {}.data(),
+        data: open_clockwork_network_program::instruction::TakeSnapshotJob {}.data(),
     };
     let ix_a5 = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::EpochCutover {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::EpochCutover {
             config: Config::pubkey(),
             registry: Registry::pubkey(),
             thread: epoch_thread_pubkey,
         }
         .to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::IncrementEpoch {}.data(),
+        data: open_clockwork_network_program::instruction::IncrementEpoch {}.data(),
     };
     let ix_a6 = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::DeleteSnapshotJob {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::DeleteSnapshotJob {
             config: Config::pubkey(),
             registry: Registry::pubkey(),
             thread: epoch_thread_pubkey,
         }
         .to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::DeleteSnapshotJob {}.data(),
+        data: open_clockwork_network_program::instruction::DeleteSnapshotJob {}.data(),
     };
     let ix_a = Instruction {
-        program_id: clockwork_thread_program::ID,
-        accounts: clockwork_thread_program::accounts::ThreadCreate {
+        program_id: open_clockwork_thread_program::ID,
+        accounts: open_clockwork_thread_program::accounts::ThreadCreate {
             authority: client.payer_pubkey(),
             payer: client.payer_pubkey(),
             system_program: system_program::ID,
             thread: epoch_thread_pubkey,
         }
         .to_account_metas(Some(false)),
-        data: clockwork_thread_program::instruction::ThreadCreate {
+        data: open_clockwork_thread_program::instruction::ThreadCreate {
             amount: LAMPORTS_PER_SOL,
             id: epoch_thread_id.into(),
             instructions: vec![
@@ -243,25 +243,25 @@ fn create_threads(client: &Client, mint_pubkey: Pubkey) -> Result<()> {
     let hasher_thread_id = "clockwork.network.hasher";
     let hasher_thread_pubkey = Thread::pubkey(client.payer_pubkey(), hasher_thread_id.into());
     let registry_hash_ix = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::RegistryNonceHash {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::RegistryNonceHash {
             config: Config::pubkey(),
             registry: Registry::pubkey(),
             thread: hasher_thread_pubkey,
         }
         .to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::RegistryNonceHash {}.data(),
+        data: open_clockwork_network_program::instruction::RegistryNonceHash {}.data(),
     };
     let ix_b = Instruction {
-        program_id: clockwork_thread_program::ID,
-        accounts: clockwork_thread_program::accounts::ThreadCreate {
+        program_id: open_clockwork_thread_program::ID,
+        accounts: open_clockwork_thread_program::accounts::ThreadCreate {
             authority: client.payer_pubkey(),
             payer: client.payer_pubkey(),
             system_program: system_program::ID,
             thread: hasher_thread_pubkey,
         }
         .to_account_metas(Some(false)),
-        data: clockwork_thread_program::instruction::ThreadCreate {
+        data: open_clockwork_thread_program::instruction::ThreadCreate {
             amount: LAMPORTS_PER_SOL,
             id: hasher_thread_id.into(),
             instructions: vec![registry_hash_ix.into()],
@@ -281,13 +281,13 @@ fn create_threads(client: &Client, mint_pubkey: Pubkey) -> Result<()> {
         mint: mint_pubkey,
     };
     let ix_c = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::ConfigUpdate {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::ConfigUpdate {
             admin: client.payer_pubkey(),
             config: Config::pubkey(),
         }
         .to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::ConfigUpdate { settings }.data(),
+        data: open_clockwork_network_program::instruction::ConfigUpdate { settings }.data(),
     };
 
     client
@@ -304,7 +304,7 @@ fn create_threads(client: &Client, mint_pubkey: Pubkey) -> Result<()> {
 }
 
 fn create_geyser_plugin_config(config: &CliConfig) -> Result<()> {
-    let geyser_config = clockwork_plugin_utils::PluginConfig {
+    let geyser_config = open_clockwork_plugin_utils::PluginConfig {
         keypath: Some(config.signatory().to_owned()),
         libpath: Some(config.geyser_lib().to_owned()),
         ..Default::default()
@@ -327,9 +327,9 @@ fn start_test_validator(
     let path = config.active_runtime("solana-test-validator").to_owned();
     let cmd = &mut Command::new(path);
     cmd.arg("-r")
-        .bpf_program(config, clockwork_network_program::ID, "network")
-        .bpf_program(config, clockwork_thread_program::ID, "thread")
-        .bpf_program(config, clockwork_webhook_program::ID, "webhook")
+        .bpf_program(config, open_clockwork_network_program::ID, "network")
+        .bpf_program(config, open_clockwork_thread_program::ID, "thread")
+        .bpf_program(config, open_clockwork_webhook_program::ID, "webhook")
         .network_url(network_url)
         .clone_addresses(clone_addresses)
         .add_programs_with_path(program_infos)
@@ -397,7 +397,7 @@ impl TestValidatorHelpers for Command {
         program_id: Pubkey,
         program_name: &str,
     ) -> &mut Command {
-        let filename = format!("clockwork_{}_program.so", program_name);
+        let filename = format!("open_clockwork_{}_program.so", program_name);
         self.arg("--bpf-program")
             .arg(program_id.to_string())
             .arg(config.active_runtime(filename.as_str()).to_owned())

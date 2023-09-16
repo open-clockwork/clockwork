@@ -4,7 +4,7 @@ use anchor_lang::{
     },
     InstructionData, AccountDeserialize, ToAccountMetas
 };
-use clockwork_network_program::state::{Config, Delegation, Worker};
+use open_clockwork_network_program::state::{Config, Delegation, Worker};
 use spl_associated_token_account::get_associated_token_address;
 
 use crate::{client::Client, errors::CliError};
@@ -29,8 +29,8 @@ pub fn create(client: &Client, worker_id: u64) -> Result<(), CliError> {
     // Build ix
     let delegation_pubkey = Delegation::pubkey(worker_pubkey, worker.total_delegations);
     let ix = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::DelegationCreate {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::DelegationCreate {
             associated_token_program: anchor_spl::associated_token::ID,
             authority: client.payer_pubkey(),
             config: Config::pubkey(),
@@ -42,7 +42,7 @@ pub fn create(client: &Client, worker_id: u64) -> Result<(), CliError> {
             token_program: anchor_spl::token::ID,
             worker: worker_pubkey,
         }.to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::DelegationCreate {}.data(),
+        data: open_clockwork_network_program::instruction::DelegationCreate {}.data(),
     };
     client.send_and_confirm(&[ix], &[client.payer()]).unwrap();
 
@@ -69,8 +69,8 @@ pub fn deposit(
     let worker_pubkey = Worker::pubkey(worker_id);
     let delegation_pubkey = Delegation::pubkey(worker_pubkey, delegation_id);
     let ix = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::DelegationDeposit {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::DelegationDeposit {
             authority: client.payer_pubkey(),
             authority_tokens: get_associated_token_address(&client.payer_pubkey(), &config.mint),
             config: Config::pubkey(),
@@ -78,7 +78,7 @@ pub fn deposit(
             delegation_tokens: get_associated_token_address(&delegation_pubkey, &config.mint),
             token_program: anchor_spl::token::ID, 
         }.to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::DelegationDeposit { amount }.data(),
+        data: open_clockwork_network_program::instruction::DelegationDeposit { amount }.data(),
     };
     client.send_and_confirm(&[ix], &[client.payer()]).unwrap();
 
@@ -105,8 +105,8 @@ pub fn withdraw(
     let worker_pubkey = Worker::pubkey(worker_id);
     let delegation_pubkey = Delegation::pubkey(worker_pubkey, delegation_id);
     let ix = Instruction {
-        program_id: clockwork_network_program::ID,
-        accounts: clockwork_network_program::accounts::DelegationWithdraw {
+        program_id: open_clockwork_network_program::ID,
+        accounts: open_clockwork_network_program::accounts::DelegationWithdraw {
             authority: client.payer_pubkey(),
             authority_tokens: get_associated_token_address(&client.payer_pubkey(), &config.mint),
             config: Config::pubkey(),
@@ -114,7 +114,7 @@ pub fn withdraw(
             delegation_tokens: get_associated_token_address(&delegation_pubkey, &config.mint),
             token_program: anchor_spl::token::ID, 
         }.to_account_metas(Some(false)),
-        data: clockwork_network_program::instruction::DelegationWithdraw { amount }.data(),
+        data: open_clockwork_network_program::instruction::DelegationWithdraw { amount }.data(),
     };
     client.send_and_confirm(&[ix], &[client.payer()]).unwrap();
 

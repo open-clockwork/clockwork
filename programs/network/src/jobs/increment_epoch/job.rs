@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use clockwork_utils::thread::ThreadResponse;
+use open_clockwork_utils::thread::ThreadResponse;
 
 use crate::state::*;
 

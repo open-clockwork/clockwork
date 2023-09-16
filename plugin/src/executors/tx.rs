@@ -9,8 +9,8 @@ use std::{
 };
 
 use bincode::serialize;
-use clockwork_network_program::state::{Pool, Registry, Snapshot, SnapshotFrame, Worker};
-use clockwork_thread_program::state::VersionedThread;
+use open_clockwork_network_program::state::{Pool, Registry, Snapshot, SnapshotFrame, Worker};
+use open_clockwork_thread_program::state::VersionedThread;
 use log::info;
 use solana_quic_client::{QuicConfig, QuicConnectionManager, QuicPool};
 use solana_client::{

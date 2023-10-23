@@ -1,4 +1,4 @@
-use anchor_lang::{prelude::*, AnchorDeserialize};
+use anchor_lang::prelude::*;
 
 pub const SEED_FEE: &[u8] = b"fee";
 

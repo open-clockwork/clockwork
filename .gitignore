@@ -26,3 +26,6 @@ docker-target
 **/.coderrect
 
 /.idea
+
+# Disable old GitHub workflow
+.github*

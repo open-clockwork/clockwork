@@ -55,6 +55,7 @@ if [[ -z "$targetTriple" ]]; then
   targetTriple="$defaultTargetTriple"
 fi
 
+
 if [ -z "$maybeRustVersion" ]; then
     source scripts/ci/rust-version.sh
     maybeRustVersion="$rust_stable"

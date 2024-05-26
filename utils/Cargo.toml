@@ -13,6 +13,9 @@ keywords = ["solana"]
 [lib]
 name = "clockwork_utils"
 
+[features]
+idl-build = ["anchor-lang/idl-build"]
+
 [dependencies]
 anchor-lang = "0.30.0"
 base64 = "~0.13"

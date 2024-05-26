@@ -11,6 +11,16 @@ readme = "./README.md"
 keywords = ["solana"]
 build = "build.rs"
 
+[features]
+idl-build = [
+    "anchor-lang/idl-build",
+    "anchor-spl/idl-build",
+    "clockwork-network-program/idl-build",
+    "clockwork-thread-program/idl-build",
+    "clockwork-webhook-program/idl-build",
+    "clockwork-utils/idl-build",
+]
+
 [dependencies]
 anchor-lang = "0.30.0"
 anchor-spl = { features = ["mint", "token"], version = "0.30.0" }

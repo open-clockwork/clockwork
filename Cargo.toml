@@ -1,4 +1,5 @@
 [workspace]
+resolver = "2"
 members = [
     "cli",
     "cron",
@@ -11,7 +12,3 @@ members = [
 
 [profile.release]
 overflow-checks = true
-
-[patch.crates-io]
-anchor-lang = { git = "https://github.com/coral-xyz/anchor", branch = "master" }
-anchor-spl = { git = "https://github.com/coral-xyz/anchor", branch = "master", features = ["mint", "token"] }

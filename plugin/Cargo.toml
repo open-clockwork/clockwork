@@ -18,6 +18,9 @@ publish = false
 crate-type = ["cdylib", "rlib"]
 name = "clockwork_plugin"
 
+[features]
+idl-build = ["anchor-lang/idl-build"]
+
 [dependencies]
 anchor-lang = "0.30.0"
 async_once = "0.2.6"

@@ -40,11 +40,11 @@ pub fn handler(ctx: Context<PoolUpdate>, settings: PoolSettings) -> Result<()> {
     pool.update(&settings)?;
 
     // Reallocate memory for the pool account
-    let data_len = 8 + size_of::<Pool>() + settings.size.checked_mul(size_of::<Pubkey>()).unwrap();
-    pool.to_account_info().realloc(data_len, false)?;
+    let data_len = 8 + size_of::<Pool>() as u32 + settings.size.checked_mul(size_of::<Pubkey>() as u32).unwrap();
+    pool.to_account_info().realloc(data_len as usize, false)?;
 
     // If lamports are required to maintain rent-exemption, pay them
-    let minimum_rent = Rent::get().unwrap().minimum_balance(data_len);
+    let minimum_rent = Rent::get().unwrap().minimum_balance(data_len as usize);
     if minimum_rent > pool.to_account_info().lamports() {
         transfer(
             CpiContext::new(

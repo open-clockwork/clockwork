@@ -1,10 +1,9 @@
-use std::collections::VecDeque;
-
 use anchor_lang::{prelude::*, AnchorDeserialize};
 
 pub const SEED_POOL: &[u8] = b"pool";
 
-const DEFAULT_POOL_SIZE: usize = 1;
+const DEFAULT_POOL_SIZE: u32 = 1;
+
 
 /**
  * Pool
@@ -14,23 +13,23 @@ const DEFAULT_POOL_SIZE: usize = 1;
 #[derive(Debug)]
 pub struct Pool {
     pub id: u64,
-    pub size: usize,
-    pub workers: VecDeque<Pubkey>,
+    pub size: u32,
+    pub workers: Vec<Pubkey>,
 }
+
 
 impl Pool {
     pub fn pubkey(id: u64) -> Pubkey {
         Pubkey::find_program_address(&[SEED_POOL, id.to_be_bytes().as_ref()], &crate::ID).0
     }
 }
-
 /**
  * PoolSettings
  */
 
 #[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct PoolSettings {
-    pub size: usize,
+    pub size: u32,
 }
 
 /**
@@ -55,17 +54,17 @@ impl PoolAccount for Account<'_, Pool> {
     fn init(&mut self, id: u64) -> Result<()> {
         self.id = id;
         self.size = DEFAULT_POOL_SIZE;
-        self.workers = VecDeque::new();
+        self.workers = Vec::new();
         Ok(())
     }
 
     fn rotate(&mut self, worker: Pubkey) -> Result<()> {
         // Push new worker into the pool.
-        self.workers.push_back(worker);
+        self.workers.push(worker);
 
         // Drain pool to the configured size limit.
-        while self.workers.len() > self.size {
-            self.workers.pop_front();
+        while self.workers.len() > self.size as usize {
+            self.workers.remove(0);
         }
 
         Ok(())
@@ -75,8 +74,8 @@ impl PoolAccount for Account<'_, Pool> {
         self.size = settings.size;
 
         // Drain pool to the configured size limit.
-        while self.workers.len() > self.size {
-            self.workers.pop_front();
+        while self.workers.len() > self.size as usize {
+            self.workers.remove(0);
         }
 
         Ok(())

@@ -59,7 +59,7 @@ pub fn handler(ctx: Context<PoolRotate>) -> Result<()> {
 
     // Verify the pool has excess space or the worker can rotate in at this time.
     require!(
-        pool.workers.len().lt(&pool.size)
+        pool.workers.len().lt(&(pool.size as usize))
             || is_rotation_window_open(&registry, &snapshot, &snapshot_frame).unwrap(),
         ClockworkError::PoolFull
     );

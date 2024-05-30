@@ -128,14 +128,14 @@ impl TxExecutor {
         // Get self worker's position in the delegate pool.
         let worker_pubkey = Worker::pubkey(self.config.worker_id);
         if let Ok(pool_position) = (client.get::<Pool>(&Pool::pubkey(0)).await).map(|pool| {
-            let workers = &mut pool.workers.clone();
+            let workers = pool.workers.clone();
             PoolPosition {
                 current_position: pool
                     .workers
                     .iter()
                     .position(|k| k.eq(&worker_pubkey))
                     .map(|i| i as u64),
-                workers: workers.make_contiguous().to_vec().clone(),
+                workers: workers,
             }
         }) {
             info!("pool_position: {:?}", pool_position);

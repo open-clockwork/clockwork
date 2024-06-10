@@ -14,7 +14,7 @@ keywords = ["solana"]
 name = "clockwork_sdk"
 
 [dependencies]
-anchor-lang = "0.29.0"
+anchor-lang = "0.30.0"
 chrono = { version = "0.4.19", default-features = false, features = ["alloc"] }
 clockwork-thread-program = { path = "../programs/thread", features = ["cpi"], version = "=2.0.20" }
 nom = "~7"
@@ -22,3 +22,4 @@ once_cell = "1.5.2"
 
 [features]
 default = []
+idl-build = ["anchor-lang/idl-build"]

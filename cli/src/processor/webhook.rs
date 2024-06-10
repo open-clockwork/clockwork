@@ -29,7 +29,7 @@ pub fn create(
         .to_account_metas(Some(true)),
         data: clockwork_webhook_program::instruction::WebhookCreate {
             body,
-            headers,
+            // headers,
             id: id.clone(),
             method,
             url,

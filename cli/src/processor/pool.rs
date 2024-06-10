@@ -36,7 +36,7 @@ pub fn list(client: &Client) -> Result<(), CliError> {
 
 pub fn update(client: &Client, id: u64, size: usize) -> Result<(), CliError> {
     let pool_pubkey = Pool::pubkey(id);
-    let settings = PoolSettings { size };
+    let settings = PoolSettings { size: size.try_into().unwrap() };
     let ix = Instruction {
         program_id: clockwork_network_program::ID,
         accounts: clockwork_network_program::accounts::PoolUpdate {

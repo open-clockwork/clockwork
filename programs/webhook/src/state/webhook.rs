@@ -17,7 +17,7 @@ pub struct Webhook {
     pub authority: Pubkey,
     pub body: Vec<u8>,
     pub created_at: u64,
-    pub headers: HashMap<String, String>,
+    // pub headers: HashMap<String, String>,
     pub id: Vec<u8>,
     pub method: HttpMethod,
     pub relayer: Relayer,

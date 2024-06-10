@@ -13,8 +13,8 @@ static WEBHOOK_FEE: u64 = 1_000_000;
 #[derive(Accounts)]
 #[instruction(
     body: Vec<u8>,
-    headers: HashMap<String, String>,
-    id: Vec<u8>, 
+    // headers: HashMap<String, String>,
+    id: Vec<u8>,
     method: HttpMethod, 
     url: String
 )]
@@ -45,7 +45,7 @@ pub struct WebhookCreate<'info> {
 pub fn handler<'info>(
     ctx: Context<WebhookCreate>,
     body: Vec<u8>,
-    headers: HashMap<String, String>,
+    // headers: HashMap<String, String>,
     id: Vec<u8>,
     method: HttpMethod,
     url: String,
@@ -61,7 +61,7 @@ pub fn handler<'info>(
     webhook.authority = authority.key();
     webhook.body = body;
     webhook.created_at = current_slot;
-    webhook.headers = headers;
+    // webhook.headers = headers;
     webhook.id = id;
     webhook.method = method;
     webhook.relayer = Relayer::Clockwork;

@@ -35,7 +35,7 @@ impl GeyserPlugin for ClockworkPlugin {
         "clockwork-plugin"
     }
 
-    fn on_load(&mut self, config_file: &str) -> PluginResult<()> {
+    fn on_load(&mut self, config_file: &str, is_reload: bool) -> PluginResult<()> {
         solana_logger::setup_with_default("info");
         info!(
             "clockwork-plugin crate-info - spec: {}, geyser_interface_version: {}, rustc: {}",
@@ -43,7 +43,7 @@ impl GeyserPlugin for ClockworkPlugin {
             env!("GEYSER_INTERFACE_VERSION"),
             env!("RUSTC_VERSION")
         );
-        info!("Loading snapshot...");
+        info!("Loading snapshot..., isReload: {}", is_reload);
         let config = PluginConfig::read_from(config_file)?;
         println!("config_file: {:?}", config_file);
         *self = ClockworkPlugin::new_from_config(config);
